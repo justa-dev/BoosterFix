@@ -48,7 +48,7 @@ local function AddCommand()
 	Command:Register({"boosterfix", "fixboosters", "booster"}, function(ply, arguments)
 		ply.noboosterfix = ply.noboosterfix or false 
 		ply.noboosterfix = (not ply.noboosterfix)
-		Core:Send(ply, {"Timer", "Booster modifications have now been " .. (ply.noboosterfix and "disabled" or "enabled") .. "."})
+		Core:Send(ply, "Print", {"Timer", "Booster modifications have now been " .. (ply.noboosterfix and "disabled" or "enabled") .. "."})
 	end)
 end
 hook.Add("Initialize", "boosterfix.addcommand", AddCommand)
