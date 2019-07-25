@@ -45,7 +45,7 @@ hook.Add("AcceptInput", "boosterfix.acceptinput", AcceptInput)
 
 -- Command
 local function AddCommand()
-	Command:Register({"boosterfix", "fixboosters", "booster"}, function(client, arguments)
+	Command:Register({"boosterfix", "fixboosters", "booster"}, function(ply, arguments)
 		ply.noboosterfix = ply.noboosterfix or false 
 		ply.noboosterfix = (not ply.noboosterfix)
 		Core:Send(ply, {"Timer", "Booster modifications have now been " .. (ply.noboosterfix and "disabled" or "enabled") .. "."})
