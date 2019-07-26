@@ -30,12 +30,20 @@ local function AcceptInput(self, input, activator, caller, data)
 	elseif string.match(data, "gravity") then 
 		-- Values
 		local grav = string.match(data, "gravity (%-?%d+)")
-		local e_pos = caller:GetPos()
-		local pos = self:GetPos()
-		local vel = self:GetVelocity()
 
 		-- Set the stuff
-		if (tonumber(grav) < 0) and (not self.interval) then 
+		if (tonumber(grav) < 0) then
+			local e_pos = caller:GetPos()
+			local pos = self:GetPos()
+			local vel = self:GetVelocity()
+
+			-- Bounds > 3
+			if math.abs(caller:GetCollisionBounds().z) > 3 then 
+				e_pos.z = pos.z + (pos.z - e_pos.z)
+			else 
+				e_pos.z = e_pos.z + caller:GetCollisionBounds().z
+			end
+
 			self:SetPos(Vector(pos.x, pos.y, e_pos.z))
 			self:SetVelocity(Vector(0, 0, -vel.z + 270))
 		end
